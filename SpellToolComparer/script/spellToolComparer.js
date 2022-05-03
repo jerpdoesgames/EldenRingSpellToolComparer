@@ -159,16 +159,17 @@ class spellToolComparer
 
     calculateToolScalingForStat(aTool, aStatName, aStatValue, aWeaponLevel)
     {
+        let statIndex = aStatValue - 1;
         let scalingMap = this.getScalingMapByID(aTool.scalingMapID);
         if (scalingMap != null && scalingMap["magic"][aStatName])
         {
-            let calcCorrect = scalingPaths[aTool.scalingPath][aStatValue];
+            let calcCorrect = scalingPaths[aTool.scalingPath][statIndex];
             let statScaling = aTool.scalingEntries[aWeaponLevel][aStatName]
 
             if (statScaling == 0)
                 return 0;
             else
-                return Math.floor(statScaling * Math.floor(calcCorrect));
+                return statScaling * calcCorrect;
         }
         else
         {
@@ -237,14 +238,14 @@ class spellToolComparer
                     let curSchool = this.spellSchools[schoolIndex];
                     if (curSchool.enabled && aToolData[toolIndex].schoolName == curSchool.name)
                     {
-                        adjustedScaling = Math.floor(curToolScaling * aToolData[toolIndex].schoolMultiplier);
+                        adjustedScaling = curToolScaling * aToolData[toolIndex].schoolMultiplier;
                         schoolBuff = true;
                         break;
                     }
                 }
             }
 
-            aOutputList.push(this.buildDisplayObject(aToolData[toolIndex].name, curToolScaling, requirementMet, adjustedScaling, schoolBuff));
+            aOutputList.push(this.buildDisplayObject(aToolData[toolIndex].name, Math.floor(curToolScaling), requirementMet, Math.floor(adjustedScaling), schoolBuff));
         }
     }
 
