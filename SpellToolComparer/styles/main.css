@@ -185,9 +185,14 @@ input, select, option {
 
 .schoolsContainerEntry span {
     display: none;
+    margin-right: 0.5rem;
 }
 
-.schoolsContainerEntrySelected span {
+.schoolsContainerEntrySelected1 .schoolCheck1 {
+    display: inline;
+}
+
+.schoolsContainerEntrySelected2 .schoolCheck2 {
     display: inline;
 }
 

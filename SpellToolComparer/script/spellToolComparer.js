@@ -236,9 +236,13 @@ class spellToolComparer
                 for (let schoolIndex = 0; schoolIndex < this.spellSchools.length; schoolIndex++)
                 {
                     let curSchool = this.spellSchools[schoolIndex];
-                    if (curSchool.enabled && aToolData[toolIndex].schoolName == curSchool.name)
+                    if (curSchool.activeCount >= 1 && aToolData[toolIndex].schoolName == curSchool.name)
                     {
-                        adjustedScaling = curToolScaling * aToolData[toolIndex].schoolMultiplier;
+                        for (let i = 0; i < curSchool.activeCount; i++)
+                        {
+                            adjustedScaling = adjustedScaling * aToolData[toolIndex].schoolMultiplier;
+                        }
+
                         schoolBuff = true;
                         break;
                     }
@@ -254,13 +258,20 @@ class spellToolComparer
         for(let i = 0; i < this.spellSchools.length; i++)
         {
             let curSchool = this.spellSchools[i];
-            if (curSchool.enabled)
+            if (curSchool.activeCount == 2)
             {
-                curSchool.control.classList.add("schoolsContainerEntrySelected");
+                curSchool.control.classList.add("schoolsContainerEntrySelected2");
+                curSchool.control.classList.remove("schoolsContainerEntrySelected1");
+            }
+            else if (curSchool.activeCount == 1)
+            {
+                curSchool.control.classList.add("schoolsContainerEntrySelected1");
+                curSchool.control.classList.remove("schoolsContainerEntrySelected2");
             }
             else
             {
-                curSchool.control.classList.remove("schoolsContainerEntrySelected");
+                curSchool.control.classList.remove("schoolsContainerEntrySelected1");
+                curSchool.control.classList.remove("schoolsContainerEntrySelected2");
             }
 
         }
@@ -307,7 +318,19 @@ class spellToolComparer
     toggleSpellSchool(aEvent)
     {
         let schoolIndex = parseInt(aEvent.target.id.substring(12));
-        this.spellSchools[schoolIndex].enabled = !this.spellSchools[schoolIndex].enabled;
+        if (this.spellSchools[schoolIndex].activeCount >= 2)
+        {
+            this.spellSchools[schoolIndex].activeCount = 0;
+        }
+        else if (this.spellSchools[schoolIndex].activeCount == 1)
+        {
+            this.spellSchools[schoolIndex].activeCount = 2;
+        }
+        else
+        {
+            this.spellSchools[schoolIndex].activeCount = 1;
+        }
+
         this.updateDisplay();
     }
 
@@ -350,13 +373,12 @@ class spellToolComparer
 
 	initialize()
 	{
-
         this.contentElement = document.getElementById("outputDiv");
         this.controlSorting = document.getElementById("controlSorting");
         this.controlSpellType = document.getElementById("controlSpellType");
         for (let i = 0; i < this.spellSchools.length; i++)
         {
-            this.spellSchools[i].enabled = false;
+            this.spellSchools[i].activeCount = 0;
             this.spellSchools[i].control = document.getElementById("schoolSelect"+i);
             this.spellSchools[i].control.addEventListener("click", this.toggleSpellSchool.bind(this));
         }
