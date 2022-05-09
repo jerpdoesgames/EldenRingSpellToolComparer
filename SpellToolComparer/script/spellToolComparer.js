@@ -308,9 +308,10 @@ class spellToolComparer
         {
             let requirementMetString = displayArmamentList[i].requirementMet ? "": ` requirementUnmet`;
             let schoolBuffString = displayArmamentList[i].schoolBuff ? ` schoolBuff`: "";
-            output += `<tr><td>${displayArmamentList[i].name}</td><td class="colSpellBuff${requirementMetString}">${displayArmamentList[i].scaling}</td><td class="colAdjustedBuff${requirementMetString}${schoolBuffString}">${displayArmamentList[i].adjustedScaling}</td></tr>`;
+            let schoolBuffEstimateString = displayArmamentList[i].schoolBuff ? "~": "";
+            output += `<tr><td>${displayArmamentList[i].name}</td><td class="colSpellBuff${requirementMetString}">${displayArmamentList[i].scaling}</td><td class="colAdjustedBuff${requirementMetString}${schoolBuffString}">${schoolBuffEstimateString}${displayArmamentList[i].adjustedScaling}</td></tr>`;
         }
-        this.contentElement.innerHTML = `<table><thead><tr><td>Name</td><td class="colSpellBuff">Scaling</td><td class="colAdjustedBuff">Adjusted</td></tr></thead>${output}</table>`;
+        this.contentElement.innerHTML = `<table><thead><tr><td>Name</td><td class="colSpellBuff">Scaling</td><td class="colAdjustedBuff">Estimated*</td></tr></thead>${output}</table>`;
 
         this.updateSchoolChecks();
     }
