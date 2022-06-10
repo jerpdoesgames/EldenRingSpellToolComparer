@@ -9,9 +9,6 @@
     --colorAccentDark: #afa780;
     --colorRequirementUnmet: #e46363;
     --colorSchoolBuff: #7bca71;
-
-
-	/* --cornerRoundStandard: 1.25rem;*/
 }
 
 html, body {
@@ -24,30 +21,14 @@ html, body {
     background: linear-gradient(0deg, #373830 0%, #525044 15%, #2b2c26 70%, #0b0b09 100%);
     background-attachment: fixed;
 
-    text-shadow: 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.2);
-}
-
-@font-face {
-	font-family: Garamond;
-	src: url('../fonts/gara.ttf');
-}
-
-@font-face {
-	font-family: GaramondBold;
-	src: url('../fonts/garabd.ttf');
+    text-shadow: 0.15rem 0.15rem 0.0rem rgba(0, 0, 0, 0.50);
 }
 
 body {
 	margin: 4rem 0rem 0rem 0rem;
 	font-size: 1.8rem;
     line-height: 1.9rem;
-	font-family: Garamond, Helvetica, Arial, sans-serif;
-
-	text-shadow:
-		0.2rem -0.2rem 0.25rem #00000066,
-		0.2rem -0.2rem 0.25rem #00000066,
-		-0.2rem 0.2rem 0.25rem #00000066,
-		0.2rem 0.2rem 0.25rem #00000066;
+	font-family: Calibri, Adobe Gothic Standard B, Helvetica, Arial, sans-serif;
 }
 
 #contentBody {
@@ -87,7 +68,6 @@ table tr td {
 }
 
 thead {
-    font-family: Garamond, Helvetica, Arial, sans-serif;
     color: var(--colorAccentLight);
     font-size: 2rem;
     line-height: 2.4rem;
@@ -105,7 +85,6 @@ thead {
 h1 {
     font-size: 4rem;
     line-height: 5.2rem;
-    font-weight: normal;
     padding: 0.25rem 0rem 0.25rem 0rem;
     text-align: center;
     background-color: #34362a66;
@@ -116,7 +95,6 @@ h1 {
 h2 {
     font-size: 2.5rem;
     line-height: 2.6rem;
-    font-weight: normal;
     padding: 0.25rem 0rem 0.25rem 0rem;
     text-align: center;
     background-color: #34362a66;
@@ -130,10 +108,12 @@ h2 {
     flex-basis: 40rem;
 }
 
-.mainDescription {
+.mainDescription, #footer p {
     text-align: center;
     max-width: 80rem;
     margin: 1.5rem auto;
+    padding: 0rem 0.5rem;
+    line-height: 2rem;
 }
 
 .schoolsContainerEntry span {
@@ -251,5 +231,27 @@ a:active {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
 }
+
+/* Mobile support, M'lord - Boc, 2022 */
+
+/* 635 / 40px (font size) */
+@media screen and (max-width: 635px) {
+    h1 {
+        font-size: calc(100vw / 15.875);
+    }
+}
+
+@media screen and (max-width: 325px) {
+    :root {
+        font-size: 8px;
+    }
+}
+
+@media screen and (min-width: 326px) and (max-width: 400px) {
+    :root {
+        font-size: 9px;
+    }
+}
+
+/* M'lord! M'lord! */
