@@ -104,11 +104,26 @@ class spellToolComparer
         sort : SORT_SCALING_ADJUSTED,
         filter : SPELL_TYPE_ALL,
         stats: [
-            10, // Str
-            10, // Dex
-            10, // Int
-            10, // Fai
-            10  // Arc
+            {
+                name: "strength",
+                value: 10
+            },
+            {
+                name: "dexterity",
+                value: 10
+            },
+            {
+                name: "intelligence",
+                value: 10
+            },
+            {
+                name: "faith",
+                value: 10
+            },
+            {
+                name: "arcane",
+                value: 10
+            }
         ]
     };
 
