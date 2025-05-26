@@ -24,75 +24,73 @@ const SORT_SCALING_ADJUSTED = 2;
 
 class spellToolComparer
 {
-    spellSchools = [
-        {
-            name: "Stonedigger",
-            type: SPELL_TYPE_SORCERY
-        },
-        {
-            name: "Full Moon",
-            type: SPELL_TYPE_SORCERY
-        },
-        {
-            name: "Carian Sword",
-            type: SPELL_TYPE_SORCERY
-        },
-        {
-            name: "Invisibility",
-            type: SPELL_TYPE_SORCERY
-        },
-        {
-            name: "Gravity",
-            type: SPELL_TYPE_SORCERY
-        },
-        {
-            name: "Crystalian",
-            type: SPELL_TYPE_SORCERY
-        },
-        {
-            name: "Thorn",
-            type: SPELL_TYPE_SORCERY
-        },
-        {
-            name: "Death",
-            type: SPELL_TYPE_SORCERY
-        },
-        {
-            name: "Glintblade",
-            type: SPELL_TYPE_SORCERY
-        },
-        {
-            name: "Lava",
-            type: SPELL_TYPE_SORCERY,
-        },
-        {
-            name: "Golden Order",
-            type: SPELL_TYPE_INCANTATION
-        },
-        {
-            name: "Dragon Cult",
-            type: SPELL_TYPE_INCANTATION
-        },
-        {
-            name: "Fire Monk/Giant",
-            type: SPELL_TYPE_INCANTATION
-        },
-        {
-            name: "Bestial",
-            type: SPELL_TYPE_INCANTATION
-        },
-        {
-            name: "Frenzied Flame",
-            type: SPELL_TYPE_INCANTATION
-        },
-        {
-            name: "Dragon Communion",
-            type: SPELL_TYPE_INCANTATION
-        },
-        {
-            name: "Godskin Apostle",
-            type: SPELL_TYPE_INCANTATION
-        },
+    spellSchoolsInput = [
+        // { id: 0, name: "None"},
+        { id: 1, name: "Full Moon Sorcery"},
+        { id: 2, name: "Carian Sword Sorcery"},
+        { id: 3, name: "Glintblade Sorcery"},
+        { id: 4, name: "Stonedigger Sorcery"},
+        { id: 5, name: "Crystalian Sorcery"},
+        { id: 6, name: "Azur Academy Sorcery"},
+        { id: 7, name: "Lusat Academy Sorcery"},
+        { id: 8, name: "Magma Sorcery"},
+        { id: 9, name: "Thorn Sorcery"},
+        { id: 10, name: "Death Sorcery"},
+        { id: 11, name: "Gravity Sorcery"},
+        { id: 12, name: "Night Sorcery"},
+        { id: 13, name: "Cold Sorcery"},
+        { id: 14, name: "Azur Primeval Sorcery"},
+        { id: 15, name: "Lusat Primeval Sorcery"},
+        { id: 16, name: "Ymir Sorcery"},
+        { id: 20, name: "Blackflame Incantation"},
+        { id: 21, name: "Giantsflame Incantation"},
+        { id: 22, name: "Dragon Cult Incantation"},
+        { id: 23, name: "Bestial Incantation"},
+        { id: 24, name: "Golden Order Incantation"},
+        { id: 25, name: "Dragon Communion Incantation"},
+        { id: 26, name: "Frenzied Flame Incantation"},
+        { id: 27, name: "Godslayer Incantation"},
+        { id: 28, name: "Aspect of the Crucible Incantation"},
+        { id: 31, name: "Bear Incantation"},
+        { id: 32, name: "Guardian Spirit Sorcery"},
+        { id: 33, name: "Messmer Incantation"},
+        { id: 34, name: "Miquella Incantation"},
+        { id: 35, name: "Divine Bird Incantation"},
+        { id: 36, name: "Inquisitor Sorcery"},
+        // { id: 100, name: "Charged Heavy Attack"},
+        // { id: 101, name: "Horseback Attack"},
+        // { id: 102, name: "Jump Attack"},
+        // { id: 103, name: "Guard Counter Attack"},
+        // { id: 104, name: "Final Chain Attack"},
+        // { id: 105, name: "Ammunition Attack"},
+        // { id: 106, name: "Roar Attack"},
+        // { id: 107, name: "Breath Attack"},
+        // { id: 108, name: "Thrown Pot Item Attack"},
+        // { id: 109, name: "Perfume Item Attack"},
+        // { id: 110, name: "Charged Spell Attack"},
+        // { id: 111, name: "Charged Skill Attack"},
+        // { id: 112, name: "Skill Attack"},
+        // { id: 113, name: "Ranged Skill Attack"},
+        // { id: 114, name: "Vapor Attack"},
+        // { id: 116, name: "Shriek of Milos"},
+        // { id: 117, name: "Wraith Attack"},
+        // { id: 118, name: "Ammunition On-Hit Attack"},
+        // { id: 119, name: "Thrown Item Attack"},
+        // { id: 120, name: "Two Handed Attack"},
+        // { id: 121, name: "Backstep / Rolling Attack"},
+        // { id: 122, name: "Dash Attack"},
+        // { id: 123, name: "Magma Attack"},
+        // { id: 124, name: "Storm Attack"},
+        // { id: 125, name: "Divine Beast Frost Stomp Attack"},
+        // { id: 127, name: "Stomp / Kick Attack"},
+        // { id: 128, name: "Unused Attack"},
+        // { id: 129, name: "Dance Attack"},
+        // { id: 130, name: "Messmer Skill Attack"},
+        // { id: 131, name: "Hefty Thrown Pot Item Attack"},
+        // { id: 132, name: "Blood Attack"},
+        // { id: 133, name: "Lightning Skill Attack"},
+        // { id: 134, name: "Redmane Attack"},
+        // { id: 135, name: "Igon's Harpoon Attack"}
     ];
 
     updateOnChange = true;  // Disabled temporarily when modifying input fields without user intervention
@@ -126,6 +124,28 @@ class spellToolComparer
             }
         ]
     };
+
+    isSchoolUsedByTool(aSchoolID)
+    {
+        for (let i = 0; i < castingTools.length; i++)
+        {
+            if (castingTools[i].schoolID == aSchoolID)
+            {
+                return true;
+            }
+        }
+    }
+
+    getSchoolByID(aSchoolID)
+    {
+        for (var i = 0; i < this.spellSchools.length; i++)
+        {
+            if (this.spellSchools[i].id == aSchoolID)
+            {
+                return this.spellSchools[i];
+            }
+        }
+    }
 
     getScalingMapByID(aMapID)
     {
@@ -206,50 +226,54 @@ class spellToolComparer
         return b.scaling - a.scaling;
     }
 
-    processSpellToolData(aToolData, aOutputList)
+    processSpellToolData(aToolData, aOutputList, aSorceryTools, aIncantationTools)
     {
-        for (var toolIndex = 0; toolIndex < aToolData.length; toolIndex++)
+        for (let toolIndex = 0; toolIndex < aToolData.length; toolIndex++)
         {
-            let curToolScaling = 100;
-            let requirementMet = true;
-            for (let curStatIndex = 0; curStatIndex < this.configuration.stats.length; curStatIndex++)
+            let curTool = aToolData[toolIndex];
+            if ((aSorceryTools && curTool.canCastSorceries) || (aIncantationTools && curTool.canCastIncantations))
             {
-                let curWeaponLevel = aToolData[toolIndex].maxLevel == 25 ? this.configuration.weaponLevels.regular : this.configuration.weaponLevels.somber;
-                curWeaponLevel = Math.min(curWeaponLevel, aToolData[toolIndex].maxLevel);   // Mostly to cover Meteorite
-                if (this.isToolScaledByStat(aToolData[toolIndex], this.configuration.stats[curStatIndex].name) && !this.isToolRequiredStatMet(aToolData[toolIndex], this.configuration.stats[curStatIndex].name))
+                let curToolScaling = 100;
+                let requirementMet = true;
+                for (let curStatIndex = 0; curStatIndex < this.configuration.stats.length; curStatIndex++)
                 {
-                    curToolScaling = 60;
-                    requirementMet = false;
-                    break;
-                }
-                else
-                {
-                    curToolScaling += this.calculateToolScalingForStat(aToolData[toolIndex], this.configuration.stats[curStatIndex].name, this.configuration.stats[curStatIndex].value, curWeaponLevel)
-                }
-            }
-
-            let schoolBuff = false;
-            let adjustedScaling = curToolScaling;
-
-            if (requirementMet)
-            {
-                for (let schoolIndex = 0; schoolIndex < this.spellSchools.length; schoolIndex++)
-                {
-                    let curSchool = this.spellSchools[schoolIndex];
-                    if (curSchool.activeCount >= 1 && aToolData[toolIndex].schoolName == curSchool.name)
+                    let curWeaponLevel = curTool.maxLevel == 25 ? this.configuration.weaponLevels.regular : this.configuration.weaponLevels.somber;
+                    curWeaponLevel = Math.min(curWeaponLevel, curTool.maxLevel);   // Mostly to cover Meteorite
+                    if (this.isToolScaledByStat(curTool, this.configuration.stats[curStatIndex].name) && !this.isToolRequiredStatMet(curTool, this.configuration.stats[curStatIndex].name))
                     {
-                        for (let i = 0; i < curSchool.activeCount; i++)
-                        {
-                            adjustedScaling = adjustedScaling * aToolData[toolIndex].schoolMultiplier;
-                        }
-
-                        schoolBuff = true;
+                        curToolScaling = 60;
+                        requirementMet = false;
                         break;
                     }
+                    else
+                    {
+                        curToolScaling += this.calculateToolScalingForStat(curTool, this.configuration.stats[curStatIndex].name, this.configuration.stats[curStatIndex].value, curWeaponLevel)
+                    }
                 }
-            }
 
-            aOutputList.push(this.buildDisplayObject(aToolData[toolIndex].name, Math.floor(curToolScaling), requirementMet, Math.floor(adjustedScaling), schoolBuff));
+                let schoolBuff = false;
+                let adjustedScaling = curToolScaling;
+
+                if (requirementMet)
+                {
+                    for (let schoolIndex = 0; schoolIndex < this.spellSchools.length; schoolIndex++)
+                    {
+                        let curSchool = this.spellSchools[schoolIndex];
+                        if (curSchool.activeCount >= 1 && curTool.schoolID == curSchool.id)
+                        {
+                            for (let i = 0; i < curSchool.activeCount; i++)
+                            {
+                                adjustedScaling = adjustedScaling * curTool.schoolMultiplier;
+                            }
+
+                            schoolBuff = true;
+                            break;
+                        }
+                    }
+                }
+
+                aOutputList.push(this.buildDisplayObject(curTool.name, Math.floor(curToolScaling), requirementMet, Math.floor(adjustedScaling), schoolBuff));
+            }
         }
     }
 
@@ -281,11 +305,7 @@ class spellToolComparer
     {
         var displayArmamentList = [];
 
-        if (this.configuration.filter == SPELL_TYPE_ALL || this.configuration.filter == SPELL_TYPE_SORCERY)
-            this.processSpellToolData(staves, displayArmamentList);
-
-        if (this.configuration.filter == SPELL_TYPE_ALL || this.configuration.filter == SPELL_TYPE_INCANTATION)
-            this.processSpellToolData(seals, displayArmamentList);
+        this.processSpellToolData(castingTools, displayArmamentList, (this.configuration.filter == SPELL_TYPE_ALL || this.configuration.filter == SPELL_TYPE_SORCERY), (this.configuration.filter == SPELL_TYPE_ALL || this.configuration.filter == SPELL_TYPE_INCANTATION));
 
         switch(this.configuration.sort)
         {
@@ -318,18 +338,19 @@ class spellToolComparer
 
     toggleSpellSchool(aEvent)
     {
-        let schoolIndex = parseInt(aEvent.target.id.substring(12));
-        if (this.spellSchools[schoolIndex].activeCount >= 2)
+        let schoolID = parseInt(aEvent.target.id.substring(12));
+        let curSchool = this.getSchoolByID(schoolID);
+        if (curSchool.activeCount >= 2)
         {
-            this.spellSchools[schoolIndex].activeCount = 0;
+            curSchool.activeCount = 0;
         }
-        else if (this.spellSchools[schoolIndex].activeCount == 1)
+        else if (curSchool.activeCount == 1)
         {
-            this.spellSchools[schoolIndex].activeCount = 2;
+            curSchool.activeCount = 2;
         }
         else
         {
-            this.spellSchools[schoolIndex].activeCount = 1;
+            curSchool.activeCount = 1;
         }
 
         this.updateDisplay();
@@ -377,10 +398,30 @@ class spellToolComparer
         this.contentElement = document.getElementById("outputDiv");
         this.controlSorting = document.getElementById("controlSorting");
         this.controlSpellType = document.getElementById("controlSpellType");
+        let schoolListContainer = document.getElementById("schoolsContainer");
+        let schoolListOutput = "";
+
+        this.spellSchools = [];
+
+        this.spellSchoolsInput.sort(this.sortByName);
+        for (let i = 0; i < this.spellSchoolsInput.length; i++)
+        {
+            let schoolID = this.spellSchoolsInput[i].id;
+            if (this.isSchoolUsedByTool(schoolID))
+            {
+                schoolListOutput += `<div id="schoolSelect${schoolID}" class="schoolsContainerEntry">${this.spellSchoolsInput[i].name}<span class="schoolCheck1">&#10003;</span><span class="schoolCheck2">x2</span></div>`;
+                this.spellSchools.push(this.spellSchoolsInput[i]);
+            }
+        }
+
+
+        schoolListContainer.innerHTML = schoolListOutput;
+
         for (let i = 0; i < this.spellSchools.length; i++)
         {
+            let schoolID = this.spellSchools[i].id;
             this.spellSchools[i].activeCount = 0;
-            this.spellSchools[i].control = document.getElementById("schoolSelect"+i);
+            this.spellSchools[i].control = document.getElementById("schoolSelect"+schoolID);
             this.spellSchools[i].control.addEventListener("click", this.toggleSpellSchool.bind(this));
         }
 
